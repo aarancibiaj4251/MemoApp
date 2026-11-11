@@ -1,0 +1,1 @@
+String MEMO_ENTITY = 'memos';
