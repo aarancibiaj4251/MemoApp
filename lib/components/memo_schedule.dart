@@ -17,8 +17,6 @@ class MemoSchedule extends StatelessWidget {
 
     final memoBox = Hive.box(MEMO_ENTITY);
 
-    print('MEMOS: ${memoBox.values.length}');
-
     final List<NeatCleanCalendarEvent> eventList = buildMemos(memoBox);
 
     void onEventSelected(NeatCleanCalendarEvent event) {
@@ -27,10 +25,6 @@ class MemoSchedule extends StatelessWidget {
 
     void onDateSelected(DateTime value) {
       print(value.day);
-    }
-
-    if (memoBox.isEmpty) {
-      return Text('No memos found');
     }
 
     return Calendar(
