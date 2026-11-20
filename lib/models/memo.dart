@@ -1,6 +1,8 @@
 import 'dart:typed_data';
 
+import 'package:flutter/material.dart';
 import 'package:hive_ce/hive_ce.dart';
+import 'package:nihongo_memo/utils/helpers.dart';
 
 part 'memo.g.dart';
 
@@ -15,19 +17,11 @@ class Memo extends HiveObject{
   @HiveField(3)
   final DateTime updatedAt;
   @HiveField(4)
-  final Uint8List image;
+  late Uint8List image;
   @HiveField(5)
   final List<String> sentences;
-
-  Memo({required this.id, required this.name, Uint8List? image, DateTime? createdAt, DateTime? updatedAt, List<String>? sentences}) : createdAt = createdAt ?? DateTime.now(), updatedAt = updatedAt ?? DateTime.now(), image = Uint8List.fromList([]), sentences = [];
-
-  // factory Memo.fromJson(Map<String, dynamic> json) => Memo(
-  //   id: json['id'] as String,
-  //   name: json['name'] as String,
-  // );
-
-  // Map<String, dynamic> toJson() => {
-  //   'id': id,
-  //   'name': name,
-  // };
+  @HiveField(6)
+  final Color color;
+  
+  Memo({required this.id, required this.name, required this.color, Uint8List? image, List<String>? sentences, DateTime? createdAt, DateTime? updatedAt}) : createdAt = createdAt ?? DateTime.now(), updatedAt = updatedAt ?? DateTime.now(), image = Uint8List.fromList([]), sentences = [];
 }

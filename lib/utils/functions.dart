@@ -28,46 +28,13 @@ Future<void> createMemoDialog(BuildContext context) async {
 }
 
 List<NeatCleanCalendarEvent> buildMemos(Box<dynamic> memos) {
-
-
-  const colors = [Colors.blueAccent, Colors.pink, Colors.deepPurpleAccent, Colors.amberAccent];
-
-  ColorSwatch<int> randomColor() {
-    return colors[Random().nextInt(4)];
-  }
-
-  Iterable<NeatCleanCalendarEvent> eventList = memos.values.map((memo) => 
+  return memos.values.map((memo) => 
       NeatCleanCalendarEvent
       (   memo.name,
-          startTime: DateTime(DateTime.now().year, DateTime.now().month,
-              DateTime.now().day, 10, 0),
-          endTime: DateTime(DateTime.now().year, DateTime.now().month,
-              DateTime.now().day, 12, 0),
-          color: randomColor(),
+          startTime: memo.createdAt,
+          endTime: memo.createdAt,
+          color: memo.color,
           metadata: Map<String, Memo>.from({ '${memo.id}': memo }),
       )
-  );
-
-  var calendarItems = eventList.toList();
-  calendarItems.addAll([
-    NeatCleanCalendarEvent('MultiDay Event A',
-          startTime: DateTime(DateTime.now().year, DateTime.now().month,
-              DateTime.now().day, 10, 0),
-          endTime: DateTime(DateTime.now().year, DateTime.now().month,
-              DateTime.now().day + 2, 12, 0),
-          color: Colors.blueAccent,
-          metadata: Map<String, String>.from({ 'settings': 'activate again in 1 week' }),
-          isMultiDay: true),
-          NeatCleanCalendarEvent('Allday Event B',
-          startTime: DateTime(DateTime.now().year, DateTime.now().month,
-              DateTime.now().day - 2, 14, 30),
-          endTime: DateTime(DateTime.now().year, DateTime.now().month,
-              DateTime.now().day + 2, 17, 0),
-          color: Colors.pink,
-          metadata: Map<String, String>.from({ 'settings': 'activate again in next sunday' }),
-          isAllDay: true),
-  ]);
-
-
-  return calendarItems;
+  ).toList();
 }

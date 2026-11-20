@@ -3,21 +3,19 @@ import 'package:hive_ce_flutter/hive_ce_flutter.dart';
 import 'package:nihongo_memo/components/memo_schedule.dart';
 import 'package:nihongo_memo/utils/constants.dart';
 import 'package:nihongo_memo/utils/functions.dart';
-import 'package:hive_ce/hive_ce.dart';
 
-void main() {
-  runApp(HomePage());
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
 }
 
-class HomePage extends StatelessWidget {
-  HomePage({super.key});
-
+class _HomePageState extends State<HomePage> {
   var isAllowedBuildFloatingButton = true;
 
   @override
   Widget build(BuildContext context) {
-
-    var memoBox = Hive.box(MEMO_ENTITY);
 
     return Scaffold(
         appBar: AppBar(
@@ -32,7 +30,12 @@ class HomePage extends StatelessWidget {
           ),
         ),
         backgroundColor: Colors.white,
-        body: memoBox.isEmpty ? buildNoMemos(context) : MemoSchedule(),
+        body: ValueListenableBuilder<Box>(
+          valueListenable: Hive.box(MEMO_ENTITY).listenable(), 
+          builder: (context, box, widget) {
+            return box.isEmpty ? buildNoMemos(context) : MemoSchedule();
+          }
+        ),
         floatingActionButton: isAllowedBuildFloatingButton ? FloatingActionButton(
           onPressed: () => createMemoDialog(context),
           backgroundColor: Colors.deepPurple,
@@ -67,5 +70,4 @@ class HomePage extends StatelessWidget {
         ],
       );
   }
-
 }

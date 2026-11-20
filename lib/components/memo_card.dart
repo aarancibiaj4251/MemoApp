@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:nihongo_memo/models/memo.dart';
-import 'package:nihongo_memo/utils/constants.dart';
 
 class MemoCard extends StatelessWidget {
   final Memo memo;
@@ -31,7 +30,10 @@ class MemoCard extends StatelessWidget {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             clipBehavior: Clip.hardEdge,
-                            child: Image.network('https://aarancibiaj4251.github.io/sengoku-bushou/assets/img/ig_sanada.jpg'),
+                            child: Image.memory(
+                              memo.image,
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
                   ],
