@@ -7,7 +7,7 @@ class Directory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Memo memo = ModalRoute.of(context)!.settings.arguments as Memo;
+    final String memoId = ModalRoute.of(context)!.settings.arguments as String;
     return Scaffold(
       appBar: AppBar(
         title: Text('Learning topic', style: TextStyle(color: Colors.white)),
@@ -32,7 +32,7 @@ class Directory extends StatelessWidget {
                         borderRadius: BorderRadius.circular(20),
                       ),
                       padding: EdgeInsets.all(25),
-                      child: MemoCard(memo: memo),
+                      child: MemoCard(memoId: memoId),
                   ),
           ),
         ],

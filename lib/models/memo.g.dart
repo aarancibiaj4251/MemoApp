@@ -19,7 +19,7 @@ class MemoAdapter extends TypeAdapter<Memo> {
     return Memo(
       id: fields[0] as String,
       name: fields[1] as String,
-      color: fields[6] as Color,
+      color: fields[6] as Color?,
       image: fields[4] as Uint8List?,
       sentences: (fields[5] as List?)?.cast<String>(),
       createdAt: fields[2] as DateTime?,

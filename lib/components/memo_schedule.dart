@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_neat_and_clean_calendar/flutter_neat_and_clean_calendar.dart';
 import 'package:hive_ce/hive_ce.dart';
+import 'package:nihongo_memo/models/memo.dart';
 
 import 'package:nihongo_memo/utils/constants.dart';
 import 'package:nihongo_memo/utils/functions.dart';
@@ -16,11 +17,13 @@ class MemoSchedule extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final memoBox = Hive.box(MEMO_ENTITY);
+    final memoList = memoBox.values.toList();
 
-    final List<NeatCleanCalendarEvent> eventList = buildMemos(memoBox);
+    final List<NeatCleanCalendarEvent> eventList = buildMemos(memoList.reversed);
 
     void onEventSelected(NeatCleanCalendarEvent event) {
-      Navigator.pushNamed(context, '/directory', arguments: event.metadata!.entries.first.value);
+      final memo = event.metadata!.entries.first.value as Memo;
+      Navigator.pushNamed(context, '/directory', arguments: memo.id);
     }
 
     void onDateSelected(DateTime value) {

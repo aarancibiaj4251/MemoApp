@@ -1,8 +1,5 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_neat_and_clean_calendar/flutter_neat_and_clean_calendar.dart';
-import 'package:hive_ce/hive_ce.dart';
 import 'package:nihongo_memo/components/memo_create_form.dart';
 import 'package:nihongo_memo/models/memo.dart';
 
@@ -27,8 +24,8 @@ Future<void> createMemoDialog(BuildContext context) async {
   );
 }
 
-List<NeatCleanCalendarEvent> buildMemos(Box<dynamic> memos) {
-  return memos.values.map((memo) => 
+List<NeatCleanCalendarEvent> buildMemos(Iterable<dynamic> memos) {
+  return memos.map((memo) => 
       NeatCleanCalendarEvent
       (   memo.name,
           startTime: memo.createdAt,
@@ -36,5 +33,6 @@ List<NeatCleanCalendarEvent> buildMemos(Box<dynamic> memos) {
           color: memo.color,
           metadata: Map<String, Memo>.from({ '${memo.id}': memo }),
       )
-  ).toList();
+  )
+  .toList();
 }

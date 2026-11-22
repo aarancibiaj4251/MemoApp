@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:hive_ce/hive_ce.dart';
@@ -42,6 +40,7 @@ class _MemoCreateFormState extends State<MemoCreateForm> {
       
       var first = state.fields.first;
 
+      
       var memo = Memo(id: createUUID(), name: first.value, color: randomColor());
       if (file != null) {
         var bytesFile = await file!.readAsBytes();
@@ -49,9 +48,10 @@ class _MemoCreateFormState extends State<MemoCreateForm> {
       }
 
       final memoBox = Hive.box(MEMO_ENTITY);
-      memoBox.put(memo.id, memo);
+      await memoBox.put(memo.id, memo);
+      memoBox.flush();
       
-      Navigator.pushNamed(context, '/directory', arguments: memo);
+      Navigator.pushNamed(context, '/directory', arguments: memo.id);
 
       // If the form is valid, display a snackbar. In the real world,
       // you'd often call a server or save the information in a database.

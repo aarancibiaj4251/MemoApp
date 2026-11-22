@@ -23,5 +23,5 @@ class Memo extends HiveObject{
   @HiveField(6)
   final Color color;
   
-  Memo({required this.id, required this.name, required this.color, Uint8List? image, List<String>? sentences, DateTime? createdAt, DateTime? updatedAt}) : createdAt = createdAt ?? DateTime.now(), updatedAt = updatedAt ?? DateTime.now(), image = Uint8List.fromList([]), sentences = [];
+  Memo({required this.id, required this.name, Color? color, Uint8List? image, List<String>? sentences, DateTime? createdAt, DateTime? updatedAt}) : createdAt = createdAt ?? DateTime.now(), updatedAt = updatedAt ?? DateTime.now(), image = image ?? Uint8List.fromList([]), color = color ?? Colors.blue, sentences = [];
 }
